@@ -38,7 +38,6 @@ class AddUpdateNoteActivity : AppCompatActivity() {
                             if (result.isSuccessful) {
                                 Toast.makeText(this, "Note Added Successfully", Toast.LENGTH_SHORT)
                                     .show()
-                                startActivity(Intent(this, AllNotesActivity::class.java))
                                 finish()
                             } else {
                                 Toast.makeText(this, "Note can not be added", Toast.LENGTH_SHORT)
