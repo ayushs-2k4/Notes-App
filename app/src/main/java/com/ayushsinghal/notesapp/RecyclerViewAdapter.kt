@@ -46,7 +46,7 @@ class RecyclerViewAdapter(val context: Context, val itemList: ArrayList<DataMode
         {
             val noteId = itemList[position].noteID
 //            Toast.makeText(context, noteId, Toast.LENGTH_SHORT).show()
-            var builder = AlertDialog.Builder(context)
+            val builder = AlertDialog.Builder(context)
             builder.setTitle("Confirm Delete")
             builder.setMessage("Do you want to delete this note?")
             builder.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, id ->

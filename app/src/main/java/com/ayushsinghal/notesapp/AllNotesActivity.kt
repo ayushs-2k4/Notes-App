@@ -32,7 +32,8 @@ class AllNotesActivity : AppCompatActivity() {
 
         val dbRef = Firebase.database.getReference("Notes").child(Firebase.auth.currentUser!!.uid)
 
-        dbRef.addValueEventListener(object : ValueEventListener {
+        var valueEventListener: ValueEventListener? = null
+        valueEventListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 list.clear()
 
@@ -44,9 +45,10 @@ class AllNotesActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@AllNotesActivity, "Error!!!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@AllNotesActivity, "Error!!! $error", Toast.LENGTH_SHORT).show()
             }
-        })
+        }
+        dbRef.addValueEventListener(valueEventListener)
 
         binding.createNoteButton.setOnClickListener()
         {
@@ -57,6 +59,7 @@ class AllNotesActivity : AppCompatActivity() {
 
         binding.signOutButton.setOnClickListener()
         {
+            valueEventListener.let { listener -> dbRef.removeEventListener(listener) }
             Firebase.auth.signOut()
             startActivity(Intent(this, SignInActivity::class.java))
         }

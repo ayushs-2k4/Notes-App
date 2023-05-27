@@ -17,7 +17,7 @@ class AddUpdateNoteActivity : AppCompatActivity() {
         binding = ActivityAddUpdateNoteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val dbRef = Firebase.database.getReference("Notes")
+        val dbRef = Firebase.database.getReference("Notes").child(Firebase.auth.currentUser!!.uid)
 
         if (intent.getStringExtra("MODE") == "CREATE") {
             binding.button.setOnClickListener()
@@ -33,7 +33,7 @@ class AddUpdateNoteActivity : AppCompatActivity() {
                         userID,
                         noteID!!
                     )
-                    dbRef.child(userID).child(noteID).setValue(dataModel)
+                    dbRef.child(noteID).setValue(dataModel)
                         .addOnCompleteListener { result ->
                             if (result.isSuccessful) {
                                 Toast.makeText(this, "Note Added Successfully", Toast.LENGTH_SHORT)
@@ -41,7 +41,7 @@ class AddUpdateNoteActivity : AppCompatActivity() {
                                 startActivity(Intent(this, AllNotesActivity::class.java))
                                 finish()
                             } else {
-                                Toast.makeText(this, "Note can not added", Toast.LENGTH_SHORT)
+                                Toast.makeText(this, "Note can not be added", Toast.LENGTH_SHORT)
                                     .show()
                             }
                         }
@@ -66,7 +66,7 @@ class AddUpdateNoteActivity : AppCompatActivity() {
                         userID!!,
                         noteID!!
                     )
-                    dbRef.child(userID).child(noteID).setValue(dataModel)
+                    dbRef.child(noteID).setValue(dataModel)
                         .addOnCompleteListener { result ->
                             if (result.isSuccessful) {
                                 Toast.makeText(
@@ -78,7 +78,7 @@ class AddUpdateNoteActivity : AppCompatActivity() {
                                 startActivity(Intent(this, AllNotesActivity::class.java))
                                 finish()
                             } else {
-                                Toast.makeText(this, "Note can not Updated", Toast.LENGTH_SHORT)
+                                Toast.makeText(this, "Note can not be Updated", Toast.LENGTH_SHORT)
                                     .show()
                             }
                         }
