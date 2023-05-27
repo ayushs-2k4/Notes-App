@@ -1,6 +1,7 @@
 package com.ayushsinghal.notesapp
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.ayushsinghal.notesapp.databinding.ActivityExpandedNoteBinding
@@ -43,10 +45,25 @@ class RecyclerViewAdapter(val context: Context, val itemList: ArrayList<DataMode
         holder.deleteButton.setOnClickListener()
         {
             val noteId = itemList[position].noteID
-            Toast.makeText(context, noteId, Toast.LENGTH_SHORT).show()
-            val dbRef =
-                Firebase.database.getReference("Notes").child(Firebase.auth.uid!!).child(noteId!!)
-            dbRef.removeValue()
+//            Toast.makeText(context, noteId, Toast.LENGTH_SHORT).show()
+            var builder = AlertDialog.Builder(context)
+            builder.setTitle("Confirm Delete")
+            builder.setMessage("Do you want to delete this note?")
+            builder.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, id ->
+                val dbRef =
+                    Firebase.database.getReference("Notes").child(Firebase.auth.uid!!)
+                        .child(noteId!!)
+                Toast.makeText(context, "Note Deleted Successfully", Toast.LENGTH_SHORT).show()
+                dbRef.removeValue()
+                dialog.cancel()
+            })
+
+            builder.setNegativeButton("No", DialogInterface.OnClickListener { dialog, id ->
+                dialog.cancel()
+            })
+            val alert = builder.create()
+            alert.show()
+
         }
 
         holder.updateButton.setOnClickListener()
