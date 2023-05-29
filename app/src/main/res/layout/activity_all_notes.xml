@@ -7,7 +7,7 @@
     tools:context=".AllNotesActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="54dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,12 +21,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Sign Out"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
+        app:icon="@drawable/sign_out"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar2"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="1.0"
+        android:contentDescription="Sign Out" />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/createNoteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,9 +36,9 @@
         android:layout_marginEnd="16dp"
         android:text="Create"
         app:icon="@drawable/baseline_create_24"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar2"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
         app:layout_constraintVertical_bias="1.0" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -48,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         tools:listitem="@layout/recycler_view_design" />
 
 
