@@ -30,6 +30,7 @@ class SignUpActivity : AppCompatActivity() {
                         Toast.makeText(this, "SignUp Successful", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this, AllNotesActivity::class.java))
                         finish()
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                     } else {
 //                        Toast.makeText(this, "SignUp UnSuccessful", Toast.LENGTH_SHORT).show()
                         val exception = result.exception
@@ -47,6 +48,8 @@ class SignUpActivity : AppCompatActivity() {
         {
             startActivity(Intent(this, SignInActivity::class.java))
             finish()
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
         }
     }
 }
