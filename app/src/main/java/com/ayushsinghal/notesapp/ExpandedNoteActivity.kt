@@ -11,6 +11,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ExpandedNoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityExpandedNoteBinding
@@ -39,7 +40,7 @@ class ExpandedNoteActivity : AppCompatActivity() {
                     .child(noteId!!)
 //            noteRef.removeValue()
 //            finish()
-            val builder = AlertDialog.Builder(this)
+            val builder = MaterialAlertDialogBuilder(this)
             builder.setTitle("Confirm Delete")
             builder.setMessage("Do you want to delete this note?")
             builder.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, id ->
@@ -51,7 +52,7 @@ class ExpandedNoteActivity : AppCompatActivity() {
                 dialog.cancel()
                 finish()
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-                
+
             })
 
             builder.setNegativeButton("No", DialogInterface.OnClickListener { dialog, id ->
