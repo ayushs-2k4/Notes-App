@@ -18,7 +18,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:maxLines="1"
             android:ellipsize="end"
             android:text="Sample Note Title" />
@@ -30,7 +29,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textSize="14sp"
-            android:textColor="#555555"
             android:maxLines="2"
             android:ellipsize="end"
             android:text="Sample Note Content" />
