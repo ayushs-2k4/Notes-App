@@ -50,6 +50,8 @@ class ExpandedNoteActivity : AppCompatActivity() {
                 dbRef.removeValue()
                 dialog.cancel()
                 finish()
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+                
             })
 
             builder.setNegativeButton("No", DialogInterface.OnClickListener { dialog, id ->
@@ -63,6 +65,8 @@ class ExpandedNoteActivity : AppCompatActivity() {
         binding.backButton.setOnClickListener() {
             saveUpdatedNote()
             finish()
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
         }
 
         onBackPressedCallback =
@@ -70,6 +74,8 @@ class ExpandedNoteActivity : AppCompatActivity() {
                 override fun handleOnBackPressed() {
                     saveUpdatedNote()
                     finish()
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
                 }
             }
 

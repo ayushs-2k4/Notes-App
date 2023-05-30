@@ -1,5 +1,6 @@
 package com.ayushsinghal.notesapp
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -42,8 +43,13 @@ class RecyclerViewAdapter(val context: Context, val itemList: ArrayList<DataMode
             intent.putExtra("TITLE", itemList[position].title)
             intent.putExtra("DESCRIPTION", itemList[position].description)
             intent.putExtra("NOTE ID", itemList[position].noteID)
-            
+
             context.startActivity(intent)
+            (context as Activity).overridePendingTransition(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left
+            )
+
         }
 
     }
