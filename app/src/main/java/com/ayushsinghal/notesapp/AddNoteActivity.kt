@@ -24,6 +24,7 @@ class AddNoteActivity : AppCompatActivity() {
         {
             saveNote()
             finish()
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
         onBackPressedCallback =
@@ -31,6 +32,7 @@ class AddNoteActivity : AppCompatActivity() {
                 override fun handleOnBackPressed() {
                     saveNote()
                     finish()
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
                 }
             }
 
@@ -41,8 +43,7 @@ class AddNoteActivity : AppCompatActivity() {
     private fun saveNote() {
         val dbRef = Firebase.database.getReference("Notes").child(Firebase.auth.currentUser!!.uid)
 
-        if ((binding.noteTitleID.text.toString() == "") && (binding.noteTitleID.text.toString() == "")) {
-            finish()
+        if ((binding.noteTitleID.text.toString() == "") && (binding.noteDescriptionID.text.toString() == "")) {
         } else {
             val userID = Firebase.auth.currentUser?.uid
             val noteID = dbRef.child(userID!!).push().key

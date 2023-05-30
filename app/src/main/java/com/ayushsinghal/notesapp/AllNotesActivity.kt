@@ -52,8 +52,9 @@ class AllNotesActivity : AppCompatActivity() {
         binding.createNoteButton.setOnClickListener()
         {
             val intent = Intent(this, AddNoteActivity::class.java)
-            intent.putExtra("MODE", "CREATE")
             startActivity(intent)
+
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         binding.signOutButton.setOnClickListener()
