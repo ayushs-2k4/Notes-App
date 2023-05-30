@@ -1,12 +1,10 @@
 package com.ayushsinghal.notesapp
 
 import android.content.DialogInterface
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import android.window.OnBackInvokedDispatcher
 import com.ayushsinghal.notesapp.databinding.ActivityExpandedNoteBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
@@ -70,7 +68,6 @@ class ExpandedNoteActivity : AppCompatActivity() {
         onBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-
                     saveUpdatedNote()
                     finish()
                 }

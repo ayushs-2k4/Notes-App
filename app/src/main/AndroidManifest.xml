@@ -20,7 +20,7 @@
             android:name=".ExpandedNoteActivity"
             android:exported="false" />
         <activity
-            android:name=".AddUpdateNoteActivity"
+            android:name=".AddNoteActivity"
             android:exported="false" />
         <activity
             android:name=".AllNotesActivity"

@@ -3,7 +3,6 @@ package com.ayushsinghal.notesapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract.Data
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ayushsinghal.notesapp.databinding.ActivityAllNotesBinding
@@ -52,7 +51,7 @@ class AllNotesActivity : AppCompatActivity() {
 
         binding.createNoteButton.setOnClickListener()
         {
-            val intent = Intent(this, AddUpdateNoteActivity::class.java)
+            val intent = Intent(this, AddNoteActivity::class.java)
             intent.putExtra("MODE", "CREATE")
             startActivity(intent)
         }
