@@ -64,6 +64,7 @@ class AllNotesActivity : AppCompatActivity() {
             valueEventListener.let { listener -> dbRef.removeEventListener(listener) }
             Firebase.auth.signOut()
             startActivity(Intent(this, SignInActivity::class.java))
+            finish()
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
 
         }

@@ -9,15 +9,26 @@ import androidx.core.os.postDelayed
 import com.ayushsinghal.notesapp.databinding.ActivityMainBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val splashScreenDuration = SplashScreenDuration()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        installSplashScreen().apply {
+            setKeepOnScreenCondition {
+                splashScreenDuration.isloading.value
+            }
+        }
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Handler(Looper.getMainLooper()).postDelayed(2300) {
+
+        Handler(Looper.getMainLooper()).postDelayed(1730) {
             if (Firebase.auth.currentUser != null) {
                 startActivity(Intent(this, AllNotesActivity::class.java))
             } else {
