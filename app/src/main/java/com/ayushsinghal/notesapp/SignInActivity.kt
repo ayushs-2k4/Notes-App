@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.view.isVisible
 import com.ayushsinghal.notesapp.databinding.ActivitySignInBinding
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.ktx.auth
@@ -16,18 +17,21 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.linearProgressBarSignInPage.isVisible = false
+
         binding.signInButton.setOnClickListener()
         {
-            if ((binding.emailSignInEditText.text.toString() == "") || (binding.passwordSignInEditText.text.toString() == "")) {
+            if ((binding.emailSignInEditText.editText?.text.toString() == "") || (binding.passwordSignInEditText.editText?.text.toString() == "")) {
                 Toast.makeText(this, "Email and Password can not be empty", Toast.LENGTH_SHORT)
                     .show()
             } else {
+                binding.linearProgressBarSignInPage.isVisible = true
                 Firebase.auth.signInWithEmailAndPassword(
-                    binding.emailSignInEditText.text.toString(),
-                    binding.passwordSignInEditText.text.toString()
+                    binding.emailSignInEditText.editText?.text.toString(),
+                    binding.passwordSignInEditText.editText?.text.toString()
                 ).addOnCompleteListener { result ->
                     if (result.isSuccessful) {
-                        Toast.makeText(this, "SignIn Successful", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(this, "SignIn Successful", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this, AllNotesActivity::class.java))
                         finish()
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
@@ -41,6 +45,7 @@ class SignInActivity : AppCompatActivity() {
                                 .show()
                         }
                     }
+                    binding.linearProgressBarSignInPage.isVisible = false
                 }
             }
         }
@@ -50,7 +55,7 @@ class SignInActivity : AppCompatActivity() {
             startActivity(Intent(this, SignUpActivity::class.java))
             finish()
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-            
+
         }
     }
 }

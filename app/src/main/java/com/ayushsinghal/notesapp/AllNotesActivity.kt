@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ayushsinghal.notesapp.databinding.ActivityAllNotesBinding
 import com.google.firebase.auth.ktx.auth
@@ -34,6 +35,7 @@ class AllNotesActivity : AppCompatActivity() {
         var valueEventListener: ValueEventListener? = null
         valueEventListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                binding.linearProgressBarAllNotesPage.isVisible = false
                 list.clear()
 
                 for (snap in snapshot.children) {
@@ -63,7 +65,7 @@ class AllNotesActivity : AppCompatActivity() {
             Firebase.auth.signOut()
             startActivity(Intent(this, SignInActivity::class.java))
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-            
+
         }
     }
 }

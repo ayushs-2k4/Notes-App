@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.view.isVisible
 import com.ayushsinghal.notesapp.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.ktx.auth
@@ -16,18 +17,21 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.linearProgressBarSignUpPage.isVisible = false
+
         binding.signUpButton.setOnClickListener()
         {
-            if ((binding.emailSignUpEditText.text.toString() == "") || (binding.passwordSignUpEditText.text.toString() == "")) {
+            if ((binding.emailSignUpEditText.editText?.text.toString() == "") || (binding.passwordSignUpEditText.editText?.text.toString() == "")) {
                 Toast.makeText(this, "Email and Password can not be empty", Toast.LENGTH_SHORT)
                     .show()
             } else {
+                binding.linearProgressBarSignUpPage.isVisible = true
                 Firebase.auth.createUserWithEmailAndPassword(
-                    binding.emailSignUpEditText.text.toString(),
-                    binding.passwordSignUpEditText.text.toString()
+                    binding.emailSignUpEditText.editText?.text.toString(),
+                    binding.passwordSignUpEditText.editText?.text.toString()
                 ).addOnCompleteListener { result ->
                     if (result.isSuccessful) {
-                        Toast.makeText(this, "SignUp Successful", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(this, "SignUp Successful", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this, AllNotesActivity::class.java))
                         finish()
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
@@ -40,6 +44,7 @@ class SignUpActivity : AppCompatActivity() {
                                 .show()
                         }
                     }
+                    binding.linearProgressBarSignUpPage.isVisible = false
                 }
             }
         }

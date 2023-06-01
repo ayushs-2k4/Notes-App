@@ -60,14 +60,12 @@ class ExpandedNoteActivity : AppCompatActivity() {
             })
             val alert = builder.create()
             alert.show()
-
         }
 
         binding.backButton.setOnClickListener() {
             saveUpdatedNote()
             finish()
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-
         }
 
         onBackPressedCallback =
