@@ -32,6 +32,8 @@ class AllNotesActivity : AppCompatActivity() {
 
         val dbRef = Firebase.database.getReference("Notes").child(Firebase.auth.currentUser!!.uid)
 
+        dbRef.keepSynced(true)
+
         var valueEventListener: ValueEventListener? = null
         valueEventListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
