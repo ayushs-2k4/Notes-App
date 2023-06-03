@@ -1,5 +1,6 @@
 package com.ayushsinghal.notesapp
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -29,8 +30,21 @@ class AllNotesActivity : AppCompatActivity() {
 
         binding.recyclerView.layoutManager =
             StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
+
         val rvAdapter = RecyclerViewAdapter(this, list)
         binding.recyclerView.adapter = rvAdapter
+        rvAdapter.setOnCardClickListener(object : RecyclerViewAdapter.onItemClickListener {
+            override fun onCardClick(position: Int) {
+                val intent = Intent(this@AllNotesActivity, ExpandedNoteActivity::class.java)
+                intent.putExtra("TITLE", list[position].title)
+                intent.putExtra("DESCRIPTION", list[position].description)
+                intent.putExtra("NOTE ID", list[position].noteID)
+
+                startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            }
+
+        })
 
 
         val dbRef = Firebase.database.getReference("Notes").child(Firebase.auth.currentUser!!.uid)
