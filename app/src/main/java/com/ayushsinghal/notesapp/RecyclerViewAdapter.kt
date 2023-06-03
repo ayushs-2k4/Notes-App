@@ -14,17 +14,17 @@ import androidx.recyclerview.widget.RecyclerView
 class RecyclerViewAdapter(val context: Context, val itemList: ArrayList<DataModel>) :
     RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
-    private lateinit var mListener: onItemClickListener
+    private lateinit var mListener: onCardClickListener
 
-    interface onItemClickListener {
+    interface onCardClickListener {
         fun onCardClick(position: Int)
     }
 
-    fun setOnCardClickListener(listener: onItemClickListener) {
+    fun setOnCardClickListener(listener: onCardClickListener) {
         mListener = listener
     }
 
-    class ViewHolder(itemView: View, listener: onItemClickListener) :
+    class ViewHolder(itemView: View, listener: onCardClickListener) :
         RecyclerView.ViewHolder(itemView) {
         var noteTitle: TextView = itemView.findViewById(R.id.noteTitle)
         var noteDescription: TextView = itemView.findViewById(R.id.noteDescription)

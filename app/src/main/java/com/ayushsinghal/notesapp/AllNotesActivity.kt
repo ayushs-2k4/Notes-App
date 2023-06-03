@@ -33,7 +33,7 @@ class AllNotesActivity : AppCompatActivity() {
 
         val rvAdapter = RecyclerViewAdapter(this, list)
         binding.recyclerView.adapter = rvAdapter
-        rvAdapter.setOnCardClickListener(object : RecyclerViewAdapter.onItemClickListener {
+        rvAdapter.setOnCardClickListener(object : RecyclerViewAdapter.onCardClickListener {
             override fun onCardClick(position: Int) {
                 val intent = Intent(this@AllNotesActivity, ExpandedNoteActivity::class.java)
                 intent.putExtra("TITLE", list[position].title)
