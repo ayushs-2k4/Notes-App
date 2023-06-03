@@ -27,7 +27,8 @@ class AllNotesActivity : AppCompatActivity() {
 
         list = ArrayList()
 
-        binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL)
+        binding.recyclerView.layoutManager =
+            StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
         val rvAdapter = RecyclerViewAdapter(this, list)
         binding.recyclerView.adapter = rvAdapter
 
@@ -46,6 +47,7 @@ class AllNotesActivity : AppCompatActivity() {
                     val data = snap.getValue(DataModel::class.java)
                     list.add(data!!)
                 }
+                list.reverse()
                 rvAdapter.notifyDataSetChanged()
             }
 
