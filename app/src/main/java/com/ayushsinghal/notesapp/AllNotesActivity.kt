@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ayushsinghal.notesapp.databinding.ActivityAllNotesBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -25,7 +27,7 @@ class AllNotesActivity : AppCompatActivity() {
 
         list = ArrayList()
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL)
         val rvAdapter = RecyclerViewAdapter(this, list)
         binding.recyclerView.adapter = rvAdapter
 
@@ -68,7 +70,6 @@ class AllNotesActivity : AppCompatActivity() {
             startActivity(Intent(this, SignInActivity::class.java))
             finish()
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-
         }
     }
 }
