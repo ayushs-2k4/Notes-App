@@ -8,6 +8,11 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ayushsinghal.notes.databinding.ActivityAllNotesBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.EmailAuthProvider
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -79,11 +84,28 @@ class AllNotesActivity : AppCompatActivity() {
 
         binding.signOutButton.setOnClickListener()
         {
+
             valueEventListener.let { listener -> dbRef.removeEventListener(listener) }
-            Firebase.auth.signOut()
-            startActivity(Intent(this, SignInActivity::class.java))
-            finish()
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+            val auth: FirebaseAuth = Firebase.auth
+            val providerData = auth.currentUser?.providerData
+            for (profile in providerData!!) {
+                val providerId = profile.providerId
+                // Check the sign-in method for each provider
+                if (providerId == GoogleAuthProvider.PROVIDER_ID) {
+                    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(getString(R.string.default_web_client_id)).requestEmail()
+                        .build()
+                    val googleSignInClient = GoogleSignIn.getClient(this, gso)
+                    googleSignInClient.signOut()
+                } else if (providerId == EmailAuthProvider.PROVIDER_ID) {
+                    auth.signOut()
+                }
+
+                startActivity(Intent(this, SignInActivity::class.java))
+                finish()
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+            }
         }
     }
 }
