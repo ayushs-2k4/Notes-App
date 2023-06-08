@@ -67,11 +67,7 @@ class AllNotesActivity : AppCompatActivity() {
                 list.reverse()
                 rvAdapter.notifyDataSetChanged()
 
-                if (list.size == 0) {
-                    binding.errorTextView.isVisible = true
-                } else {
-                    binding.errorTextView.isVisible = false
-                }
+                binding.errorTextView.isVisible = list.size == 0
 
             }
 
