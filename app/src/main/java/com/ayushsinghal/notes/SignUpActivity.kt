@@ -78,8 +78,7 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.googleLogoImage.setOnClickListener()
         {
-//            Toast.makeText(this, "Clicked on Google Logo - SignIn Activity", Toast.LENGTH_SHORT)
-//                .show()
+//            Toast.makeText(this, "Clicked on Google Logo - SignIn Activity", Toast.LENGTH_SHORT).show()
 
             binding.linearProgressBarSignUpPage.isVisible = true
             launcher.launch(signInClient)
@@ -100,6 +99,8 @@ class SignUpActivity : AppCompatActivity() {
                         if (it.isSuccessful) {
 //                            Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show()
                             startActivity(Intent(this, AllNotesActivity::class.java))
+                            finish()
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                         } else {
                             Toast.makeText(this, it.result.toString(), Toast.LENGTH_LONG)
                                 .show()

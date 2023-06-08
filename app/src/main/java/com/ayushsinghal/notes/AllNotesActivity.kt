@@ -66,6 +66,13 @@ class AllNotesActivity : AppCompatActivity() {
                 }
                 list.reverse()
                 rvAdapter.notifyDataSetChanged()
+
+                if (list.size == 0) {
+                    binding.errorTextView.isVisible = true
+                } else {
+                    binding.errorTextView.isVisible = false
+                }
+
             }
 
             override fun onCancelled(error: DatabaseError) {

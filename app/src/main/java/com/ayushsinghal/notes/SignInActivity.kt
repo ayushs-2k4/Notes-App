@@ -48,7 +48,6 @@ class SignInActivity : AppCompatActivity() {
                         startActivity(Intent(this, AllNotesActivity::class.java))
                         finish()
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-
                     } else {
                         val exception = result.exception
                         if (exception is FirebaseAuthException) {
@@ -68,7 +67,6 @@ class SignInActivity : AppCompatActivity() {
             startActivity(Intent(this, SignUpActivity::class.java))
             finish()
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-
         }
 
 
@@ -82,9 +80,7 @@ class SignInActivity : AppCompatActivity() {
 
         binding.googleLogoImage.setOnClickListener()
         {
-//            Toast.makeText(this, "Clicked on Google Logo - SignIn Activity", Toast.LENGTH_SHORT)
-
-            //                .show()
+//            Toast.makeText(this, "Clicked on Google Logo - SignIn Activity", Toast.LENGTH_SHORT).show()
             binding.linearProgressBarSignInPage.isVisible = true
             launcher.launch(signInClient)
         }
@@ -104,6 +100,8 @@ class SignInActivity : AppCompatActivity() {
                         if (it.isSuccessful) {
 //                            Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show()
                             startActivity(Intent(this, AllNotesActivity::class.java))
+                            this.finish()
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                         } else {
                             Toast.makeText(this, it.result.toString(), Toast.LENGTH_LONG)
                                 .show()
