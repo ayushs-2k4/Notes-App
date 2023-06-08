@@ -1,4 +1,4 @@
-package com.ayushsinghal.notesapp
+package com.ayushsinghal.notes
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

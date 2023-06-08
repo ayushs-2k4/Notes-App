@@ -1,4 +1,4 @@
-package com.ayushsinghal.notesapp
+package com.ayushsinghal.notes
 
 class DataModel() {
     var title: String? = null

@@ -1,16 +1,15 @@
-package com.ayushsinghal.notesapp
+package com.ayushsinghal.notes
 
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.ayushsinghal.notesapp.databinding.ActivityExpandedNoteBinding
+import com.ayushsinghal.notes.databinding.ActivityExpandedNoteBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AlertDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ExpandedNoteActivity : AppCompatActivity() {

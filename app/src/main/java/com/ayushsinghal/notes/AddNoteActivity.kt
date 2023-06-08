@@ -1,10 +1,10 @@
-package com.ayushsinghal.notesapp
+package com.ayushsinghal.notes
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import com.ayushsinghal.notesapp.databinding.ActivityAddNoteBinding
+import com.ayushsinghal.notes.databinding.ActivityAddNoteBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase

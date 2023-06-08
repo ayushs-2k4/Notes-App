@@ -1,4 +1,4 @@
-package com.ayushsinghal.notesapp
+package com.ayushsinghal.notes
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.core.os.postDelayed
-import com.ayushsinghal.notesapp.databinding.ActivityMainBinding
+import com.ayushsinghal.notes.databinding.ActivityMainBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen

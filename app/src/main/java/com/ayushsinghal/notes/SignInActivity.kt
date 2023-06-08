@@ -1,42 +1,43 @@
-package com.ayushsinghal.notesapp
+package com.ayushsinghal.notes
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.view.isVisible
-import com.ayushsinghal.notesapp.databinding.ActivitySignUpBinding
+import com.ayushsinghal.notes.databinding.ActivitySignInBinding
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class SignUpActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySignUpBinding
+class SignInActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySignInBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySignUpBinding.inflate(layoutInflater)
+        binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.linearProgressBarSignUpPage.isVisible = false
+        binding.linearProgressBarSignInPage.isVisible = false
 
-        binding.signUpButton.setOnClickListener()
+        binding.signInButton.setOnClickListener()
         {
-            if ((binding.emailSignUpEditText.editText?.text.toString() == "") || (binding.passwordSignUpEditText.editText?.text.toString() == "")) {
+            if ((binding.emailSignInEditText.editText?.text.toString() == "") || (binding.passwordSignInEditText.editText?.text.toString() == "")) {
                 Toast.makeText(this, "Email and Password can not be empty", Toast.LENGTH_SHORT)
                     .show()
             } else {
-                binding.linearProgressBarSignUpPage.isVisible = true
-                Firebase.auth.createUserWithEmailAndPassword(
-                    binding.emailSignUpEditText.editText?.text.toString(),
-                    binding.passwordSignUpEditText.editText?.text.toString()
+                binding.linearProgressBarSignInPage.isVisible = true
+                Firebase.auth.signInWithEmailAndPassword(
+                    binding.emailSignInEditText.editText?.text.toString(),
+                    binding.passwordSignInEditText.editText?.text.toString()
                 ).addOnCompleteListener { result ->
                     if (result.isSuccessful) {
-//                        Toast.makeText(this, "SignUp Successful", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(this, "SignIn Successful", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this, AllNotesActivity::class.java))
                         finish()
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
                     } else {
-//                        Toast.makeText(this, "SignUp UnSuccessful", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(this, "SignIn UnSuccessful", Toast.LENGTH_SHORT).show()
                         val exception = result.exception
                         if (exception is FirebaseAuthException) {
                             val errorCode = exception.errorCode
@@ -44,16 +45,16 @@ class SignUpActivity : AppCompatActivity() {
                                 .show()
                         }
                     }
-                    binding.linearProgressBarSignUpPage.isVisible = false
+                    binding.linearProgressBarSignInPage.isVisible = false
                 }
             }
         }
 
-        binding.logInInsteadButton.setOnClickListener()
+        binding.signUpInsteadButton.setOnClickListener()
         {
-            startActivity(Intent(this, SignInActivity::class.java))
+            startActivity(Intent(this, SignUpActivity::class.java))
             finish()
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
 
         }
     }

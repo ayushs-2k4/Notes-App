@@ -1,15 +1,13 @@
-package com.ayushsinghal.notesapp
+package com.ayushsinghal.notes
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.ayushsinghal.notesapp.databinding.ActivityAllNotesBinding
+import com.ayushsinghal.notes.databinding.ActivityAllNotesBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
