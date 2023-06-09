@@ -1,6 +1,7 @@
 package com.ayushsinghal.notes
 
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -15,6 +16,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class ExpandedNoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityExpandedNoteBinding
     private lateinit var onBackPressedCallback: OnBackPressedCallback
+    private var title: String? = null
+    private var description: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,39 +32,100 @@ class ExpandedNoteActivity : AppCompatActivity() {
             binding.expandedNoteDescriptionID.maxLines = Integer.MAX_VALUE
         }
 
-        binding.expandedNoteTitleID.setText(intent.getStringExtra("TITLE"))
-        binding.expandedNoteDescriptionID.setText(intent.getStringExtra("DESCRIPTION"))
+        title = intent.getStringExtra("TITLE")
+        description = intent.getStringExtra("DESCRIPTION")
 
-        binding.deleteButton.setOnClickListener() {
-            val noteId = intent.getStringExtra("NOTE ID")
-            val noteRef =
-                Firebase.database.getReference("Notes").child(Firebase.auth.currentUser!!.uid)
-                    .child(noteId!!)
-//            noteRef.removeValue()
+        binding.expandedNoteTitleID.setText(title)
+        binding.expandedNoteDescriptionID.setText(description)
+
+//        binding.deleteButton.setOnClickListener() {
+//            val noteId = intent.getStringExtra("NOTE ID")
+//            val noteRef =
+//                Firebase.database.getReference("Notes").child(Firebase.auth.currentUser!!.uid)
+//                    .child(noteId!!)
+////            noteRef.removeValue()
+////            finish()
+//            val builder = MaterialAlertDialogBuilder(this)
+//            builder.setTitle("Confirm Delete")
+//            builder.setMessage("Do you want to delete this note?")
+//            builder.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, id ->
+//                val dbRef =
+//                    Firebase.database.getReference("Notes").child(Firebase.auth.uid!!)
+//                        .child(noteId)
+//                Toast.makeText(this, "Note Deleted Successfully", Toast.LENGTH_SHORT).show()
+//                dbRef.removeValue()
+//                dialog.cancel()
+//                finish()
+//                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+//
+//            })
+//
+//            builder.setNegativeButton("No", DialogInterface.OnClickListener { dialog, id ->
+//                dialog.cancel()
+//            })
+//            val alert = builder.create()
+//            alert.show()
+//        }
+
+//        binding.backButton.setOnClickListener() {
+//            saveUpdatedNote()
 //            finish()
-            val builder = MaterialAlertDialogBuilder(this)
-            builder.setTitle("Confirm Delete")
-            builder.setMessage("Do you want to delete this note?")
-            builder.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, id ->
-                val dbRef =
-                    Firebase.database.getReference("Notes").child(Firebase.auth.uid!!)
-                        .child(noteId)
-                Toast.makeText(this, "Note Deleted Successfully", Toast.LENGTH_SHORT).show()
-                dbRef.removeValue()
-                dialog.cancel()
-                finish()
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+//            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+//        }
 
-            })
+        binding.toolBar.setOnMenuItemClickListener()
+        { menuItem ->
 
-            builder.setNegativeButton("No", DialogInterface.OnClickListener { dialog, id ->
-                dialog.cancel()
-            })
-            val alert = builder.create()
-            alert.show()
+            when (menuItem.itemId) {
+                R.id.delete -> {
+                    val noteId = intent.getStringExtra("NOTE ID")
+                    val noteRef =
+                        Firebase.database.getReference("Notes")
+                            .child(Firebase.auth.currentUser!!.uid)
+                            .child(noteId!!)
+                    val builder = MaterialAlertDialogBuilder(this)
+                    builder.setTitle("Confirm Delete")
+                    builder.setMessage("Do you want to delete this note?")
+                    builder.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, id ->
+                        val dbRef =
+                            Firebase.database.getReference("Notes").child(Firebase.auth.uid!!)
+                                .child(noteId)
+                        Toast.makeText(this, "Note Deleted Successfully", Toast.LENGTH_SHORT).show()
+                        dbRef.removeValue()
+                        dialog.cancel()
+                        finish()
+                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+                    })
+
+                    builder.setNegativeButton("No", DialogInterface.OnClickListener { dialog, id ->
+                        dialog.cancel()
+                    })
+                    val alert = builder.create()
+                    alert.show()
+
+                    true
+                }
+
+                R.id.share -> {
+                    val intent = Intent()
+                    intent.action = Intent.ACTION_SEND
+                    intent.putExtra(
+                        Intent.EXTRA_TEXT, "$title" + "\n" + "$description"
+                    )
+                    intent.type = "text/plain"
+                    val intentChooser = Intent.createChooser(intent, "Hi")
+                    startActivity(intentChooser)
+                    
+                    true
+                }
+
+                else -> {
+                    true
+                }
+            }
         }
 
-        binding.backButton.setOnClickListener() {
+        binding.toolBar.setNavigationOnClickListener {
             saveUpdatedNote()
             finish()
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
